@@ -6,13 +6,16 @@
   productName: "kamiectron",
   directories: {
     output: "release/${version}",
+    buildResources: "build",
   },
   files: ["dist", "dist-electron"],
   mac: {
+    icon: "build/icon.icns",
     target: ["dmg"],
     artifactName: "${productName}-Mac-${version}-Installer.${ext}",
   },
   win: {
+    icon: "build/icon.ico",
     target: [
       {
         target: "nsis",
@@ -28,7 +31,8 @@
     deleteAppDataOnUninstall: false,
   },
   linux: {
-    target: ["AppImage"],
+    icon: "build/icons",
+    target: ["flatpak"],
     artifactName: "${productName}-Linux-${version}.${ext}",
   },
 }

@@ -3,17 +3,17 @@
 
 <head>
   <meta charset="UTF-8" />
-  <link rel="icon" type="image/svg+xml" href="/vite.svg" />
+  <link rel="shortcut icon" href="./icon.png" type="image/x-icon">
   <meta name="viewport" content="width=device-width, initial-scale=1.0" />
   <title>okk</title>
 </head>
-<header class="bg-[#14151d]">
-  <div class="flex justify-between px-3 py-1">
-    <div class="text-[#c0caf5]">
+<header>
+  <div>
+    <div id="window_title">
       <span>Hello</span>
     </div>
-    <div class="w-full [-webkit-app-region:drag;]"></div>
-    <div class="flex items-center gap-2 window_controls [&_svg]:text-[#c0caf5] [&_svg]:cursor-pointer [-webkit-app-region:no-drag;]">
+    <div class="drag_area"></div>
+    <div class="window_controls">
       <!--! min-button -->
       <div id="min-button">
         <svg xmlns="http://www.w3.org/2000/svg" width="16" height="16" viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="2" stroke-linecap="round" stroke-linejoin="round" class="lucide lucide-minus">
@@ -50,6 +50,7 @@
 <body>
   <div id="root"></div>
   <script type="module" src="/src/main.tsx"></script>
+  <script type="module" defer src="/src/render.js"></script>
 </body>
 
 </html>

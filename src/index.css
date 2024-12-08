@@ -10,8 +10,34 @@ body {
   /* -webkit-app-region: no-drag; */
 }
 header {
+  background: #14151d;
   border-top-left-radius: var(--border-r);
   border-top-right-radius: var(--border-r);
+}
+header > div {
+  display: flex;
+  justify-content: space-between;
+  padding: 4px 12px;
+}
+.drag_area {
+  width: 100%;
+  -webkit-app-region: drag;
+}
+.window_controls {
+  display: flex;
+  align-items: center;
+  gap: 8px;
+  -webkit-app-region: no-drag;
+  svg {
+    color: #c0caf5;
+    cursor: pointer;
+  }
+}
+#window_title {
+  color: #c0caf5;
+}
+#restore-button {
+  display: none;
 }
 #root {
   border-bottom-left-radius: var(--border-r);

@@ -29,7 +29,7 @@ let win: BrowserWindow | null
 
 function createWindow() {
   win = new BrowserWindow({
-    icon: path.join(process.env.VITE_PUBLIC, 'electron-vite.svg'),
+    icon: path.join(process.env.VITE_PUBLIC, 'icon.png'),
     width: 1200,
     height: 680,
     minWidth: 948,
@@ -53,6 +53,21 @@ function createWindow() {
     // win.loadFile('dist/index.html')
     win.loadFile(path.join(RENDERER_DIST, 'index.html'))
   }
+  // on minimize
+  win.on('maximize', () => {
+    if (win)
+      win.webContents.send('window-state-changed', true);
+  });
+
+  win.on('unmaximize', () => {
+    if (win)
+      win.webContents.send('window-state-changed', false);
+  });
+
+  win.on('restore', () => {
+    if (win)
+      win.webContents.send('window-state-changed', false);
+  });
 }
 
 // Quit when all windows are closed, except on macOS. There, it's common
@@ -74,7 +89,7 @@ app.on('activate', () => {
 })
 
 app.whenReady().then(createWindow)
-
+// open new window
 ipcMain.handle('open-new-window', async (_, appPath: string) => {
   const win2 = new BrowserWindow({
     icon: path.join(process.env.VITE_PUBLIC, 'electron-vite.svg'),
@@ -100,5 +115,35 @@ ipcMain.handle('open-new-window', async (_, appPath: string) => {
     // Production mode
     const url = path.join(RENDERER_DIST, 'index.html');
     win2.loadFile(url, { hash: `#/${appPath}` });
+  }
+});
+// controls
+ipcMain.on("app/minimize", (e) => {
+  const currentWindow = BrowserWindow.fromWebContents(e.sender);
+  if (currentWindow) {
+    currentWindow.minimize();
+  }
+});
+
+ipcMain.on("app/maximize", (e) => {
+  const currentWindow = BrowserWindow.fromWebContents(e.sender);
+  if (currentWindow) {
+    currentWindow.maximize();
+  }
+});
+
+ipcMain.on("app/restore", (e) => {
+  const currentWindow = BrowserWindow.fromWebContents(e.sender);
+
+  if (currentWindow) {
+    currentWindow.restore();
+  }
+});
+
+ipcMain.on("app/close", (e) => {
+  const currentWindow = BrowserWindow.fromWebContents(e.sender);
+
+  if (currentWindow) {
+    currentWindow.close();
   }
 });
