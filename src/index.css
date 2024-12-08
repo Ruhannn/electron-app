@@ -1,8 +1,29 @@
 @tailwind base;
 @tailwind components;
 @tailwind utilities;
-:root {
-  --border-r: 12px;
+
+/* colors */
+@layer base {
+  :root {
+    --border-r: 12px;
+    --text: #040316;
+    --background: #dedde4;
+    --primary: #343b58;
+    --secondary: #f9f7ff;
+    --accent: #343b58;
+  }
+  .dark {
+    --border-r: 12px;
+    --text: #eae9fc;
+    --background: #1c1b22;
+    --primary: #7aa2f7;
+    --secondary: #000000;
+    --accent: #7aa2f7;
+  }
+}
+
+* {
+  user-select: none;
 }
 
 body {
@@ -10,7 +31,7 @@ body {
   /* -webkit-app-region: no-drag; */
 }
 header {
-  background: #14151d;
+  background: var(--secondary);
   border-top-left-radius: var(--border-r);
   border-top-right-radius: var(--border-r);
 }
@@ -29,12 +50,12 @@ header > div {
   gap: 8px;
   -webkit-app-region: no-drag;
   svg {
-    color: #c0caf5;
+    color: var(--text);
     cursor: pointer;
   }
 }
 #window_title {
-  color: #c0caf5;
+  color: var(--text);
 }
 #restore-button {
   display: none;
@@ -45,5 +66,5 @@ header > div {
   overflow: hidden;
   height: calc(100vh - 32px);
   /* width: 100vw; */
-  background-color: #1a1b26;
+  background-color: var(--background);
 }

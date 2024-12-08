@@ -2,11 +2,10 @@ import { useState } from "react";
 export default function Home() {
   const [translate, setTranslate] = useState({ x: 0, y: 0 });
   const open = () => {
-    console.log("hei");
     window.ipcRenderer.invoke("open-new-window", "new");
   };
   return (
-    <div className="flex justify-center items-center font-sans bg-[#1a1b26] relative overflow-hidden h-screen">
+    <div className="relative flex items-center justify-center h-screen overflow-hidden font-sans bg-background">
       <div
         className="group w-[400px] cursor-pointer"
         onMouseLeave={() =>
@@ -18,7 +17,7 @@ export default function Home() {
         }>
         <h1
           onClick={open}
-          className="text-4xl text-[#c0caf5] text-center">
+          className="text-4xl text-center text-text">
           Hello Ruhan :3
         </h1>
         <img
