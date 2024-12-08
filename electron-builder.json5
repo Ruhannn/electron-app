@@ -1,9 +1,9 @@
 // @see - https://www.electron.build/configuration/configuration
 {
   $schema: "https://raw.githubusercontent.com/electron-userland/electron-builder/master/packages/app-builder-lib/scheme.json",
-  appId: "YourAppID",
+  appId: "2222222222222222222222",
   asar: true,
-  productName: "YourAppName",
+  productName: "kamiectron",
   directories: {
     output: "release/${version}",
   },

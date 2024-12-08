@@ -1,3 +1,23 @@
 @tailwind base;
 @tailwind components;
 @tailwind utilities;
+:root {
+  --border-r: 12px;
+}
+
+body {
+  background-color: transparent;
+  /* -webkit-app-region: no-drag; */
+}
+header {
+  border-top-left-radius: var(--border-r);
+  border-top-right-radius: var(--border-r);
+}
+#root {
+  border-bottom-left-radius: var(--border-r);
+  border-bottom-right-radius: var(--border-r);
+  overflow: hidden;
+  height: calc(100vh - 32px);
+  /* width: 100vw; */
+  background-color: #1a1b26;
+}

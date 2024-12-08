@@ -1,7 +1,8 @@
-import { app, BrowserWindow } from 'electron'
+import { app, BrowserWindow, ipcMain } from 'electron'
 
 import { fileURLToPath } from 'node:url'
 import path from 'node:path'
+
 
 
 const __dirname = path.dirname(fileURLToPath(import.meta.url))
@@ -29,6 +30,13 @@ let win: BrowserWindow | null
 function createWindow() {
   win = new BrowserWindow({
     icon: path.join(process.env.VITE_PUBLIC, 'electron-vite.svg'),
+    width: 1200,
+    height: 680,
+    minWidth: 948,
+    minHeight: 560,
+    frame: false,
+    transparent: true,
+    autoHideMenuBar: true,
     webPreferences: {
       preload: path.join(__dirname, 'preload.mjs'),
     },
@@ -66,3 +74,31 @@ app.on('activate', () => {
 })
 
 app.whenReady().then(createWindow)
+
+ipcMain.handle('open-new-window', async (_, appPath: string) => {
+  const win2 = new BrowserWindow({
+    icon: path.join(process.env.VITE_PUBLIC, 'electron-vite.svg'),
+    width: 1200,
+    height: 680,
+    minWidth: 948,
+    minHeight: 560,
+    frame: false,
+    transparent: true,
+    autoHideMenuBar: true,
+    webPreferences: {
+      preload: path.join(__dirname, 'preload.mjs'),
+    },
+  });
+  // http://localhost:5173/#/new
+  // console.log(appPath);
+  // console.log('Final URL:', VITE_DEV_SERVER_URL ? `${VITE_DEV_SERVER_URL}#/${appPath}` : `index.html#/${appPath}`);
+
+  if (VITE_DEV_SERVER_URL) {
+    // Development mode
+    win2.loadURL(`${VITE_DEV_SERVER_URL}#/${appPath}`);
+  } else {
+    // Production mode
+    const url = path.join(RENDERER_DIST, 'index.html');
+    win2.loadFile(url, { hash: `#/${appPath}` });
+  }
+});
